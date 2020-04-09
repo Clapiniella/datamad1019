@@ -1,12 +1,12 @@
 #1. Import the NUMPY package under the name np.
 import numpy as np
-
+'''
 
 #2. Print the NUMPY version and the configuration.
 print(np.__version__)
 print(np.show_config())
 
-
+'''
 
 #3. Generate a 2x3x5 3-dimensional array with random values. Assign the array to variable "a"
 # Challenge: there are at least three easy ways that use numpy to generate random arrays. How many ways can you find?
@@ -49,7 +49,7 @@ print(np.shape(c))
 #10. Try to add a and c. Now it should work. Assign the sum to varialbe "d". But why does it work now?
 d= np.add(a,c)
 print(d)
-
+'''
 #Cause now they have the same shape
 
 
@@ -84,7 +84,7 @@ f=np.empty((2,3,5))
 print(f)
 
 
-"""
+
 #16. Populate the values in f. For each value in d, if it's larger than d_min but smaller than d_mean, assign 25 to the corresponding value in f.
 If a value in d is larger than d_mean but smaller than d_max, assign 75 to the corresponding value in f.
 If a value equals to d_mean, assign 50 to the corresponding value in f.
@@ -92,7 +92,7 @@ Assign 0 to the corresponding value(s) in f for d_min in d.
 Assign 100 to the corresponding value(s) in f for d_max in d.
 In the end, f should have only the following values: 0, 25, 50, 75, and 100.
 Note: you don't have to use Numpy in this question.
-"""
+
 for i in range(len(d)):
         for j in range(len(d[i])):
                 for k in range(len(d[i][j])):
@@ -107,12 +107,29 @@ for i in range(len(d)):
                         elif d[i][j][k]==d_max:
                                 f[i][j][k]=100
 
+'''
+f = np.empty(d.shape)
+d_max = np.max(d)
+d_min = np.min(d)
+d_mean = np.mean(d)
+
+for e,i in np.nditer([d, f], op_flags=["readwrite"]):
+        if e > d_min and i < d_mean:
+                i[...] = 25
+        if e > d_mean and i < d_max:
+                i[...] = 75
+        if e == d_mean:
+                i[...] = 50
+        if e == d_min:
+                i[...] = 0
+        if e == d_max:
+                i[...] = 100
+
+print(f) 
 
 
 
-
-
-"""
+'''
 #17. Print d and f. Do you have your expected f?
 For instance, if your d is:
 array([[[1.85836099, 1.67064465, 1.62576044, 1.40243961, 1.88454931],
@@ -131,10 +148,10 @@ array([[[ 75.,  75.,  75.,  25.,  75.],
        [[ 25.,  25.,  25.,  25., 100.],
         [ 75.,  75.,  75.,  75.,  75.],
         [ 25.,  75.,   0.,  75.,  75.]]])
-"""
+
 print(d)
 print(f)
-"""
+
 #18. Bonus question: instead of using numbers (i.e. 0, 25, 50, 75, and 100), how to use string values 
 ("A", "B", "C", "D", and "E") to label the array elements? You are expecting the result to be:
 array([[[ 'D',  'D',  'D',  'B',  'D'],
@@ -145,7 +162,7 @@ array([[[ 'D',  'D',  'D',  'B',  'D'],
         [ 'D',  'D',  'D',  'D',  'D'],
         [ 'B',  'D',   'A',  'D', 'D']]])
 Again, you don't need Numpy in this question.
-"""
+
 f=np.empty((2,3,5), dtype=type(str))
 
 for i in range(len(d)):
@@ -163,3 +180,4 @@ for i in range(len(d)):
                                 f[i][j][k]="E"
 
 print(f)
+'''
